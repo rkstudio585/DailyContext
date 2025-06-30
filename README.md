@@ -6,9 +6,19 @@ DailyContext is a pure Python terminal application that provides a personalized 
 
 - **Date & Time Widget:** Displays the current local date and time.
 - **Quote Widget:** Fetches and displays a random motivational quote from a local file.
-- **To-Do Widget:** Reads and shows pending tasks from a `todo.txt` file.
-- **TIL Widget:** Picks and displays a random note from a `til/` folder.
+- **To-Do Widget:** Manages and displays pending tasks from a `todo.txt` file, allowing users to add, remove, and mark tasks as complete.
+- **TIL Widget:** Manages and displays "Today I Learned" notes from a `til/` folder, allowing users to add new notes, search existing ones, and list all notes.
 - **Daily Question Widget:** Presents a daily prompt question and records the user's answer to a local log file.
+- **System Information Widget:** Displays basic system details like operating system, architecture, Python version, disk usage, and uptime.
+- **Greeting Widget:** Provides a customizable greeting based on the time of day.
+
+## Interactive Mode
+
+The application now features an interactive menu, allowing users to navigate between different functionalities:
+
+-   **Display Dashboard:** Shows all the widgets in a single view.
+-   **Manage To-Do List:** Provides options to interact with your to-do tasks.
+-   **Manage TIL Notes:** Provides options to interact with your TIL notes.
 
 ## Setup
 

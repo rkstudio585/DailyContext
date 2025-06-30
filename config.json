@@ -20,5 +20,12 @@
             "What is your intention for tomorrow?"
         ],
         "log_file": "data/daily_log.md"
+    },
+    "system_info": {
+        "enabled": true
+    },
+    "greeting": {
+        "enabled": true,
+        "name": "User"
     }
 }
