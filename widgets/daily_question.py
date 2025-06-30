@@ -1,24 +1,31 @@
-import os
-import random
-from datetime import datetime
-from widgets.base_widget import Widget
+from rich.panel import Panel
+from rich.prompt import Prompt
+from rich.text import Text
 
-class DailyQuestionWidget(Widget):
-    def display(self):
-        questions = self.config.get('daily_question', {}).get('questions', [])
-        log_file = self.config.get('daily_question', {}).get('log_file')
+class DailyQuestionWidget:
+    def __init__(self, config):
+        self.config = config
+        self.questions = [
+            "What are you grateful for today?",
+            "What is one thing you want to accomplish today?",
+            "What is something that made you smile today?",
+            "How are you feeling today, and why?",
+            "What is one new thing you learned today?"
+        ]
 
-        if questions:
-            question = random.choice(questions)
-            print(f"Daily Question: {question}")
-            answer = input("Your answer: ")
-            if log_file:
-                with open(log_file, 'a') as f:
-                    f.write(f"\n## {datetime.now().strftime('%Y-%m-%d')}\n")
-                    f.write(f"**Question:** {question}\n")
-                    f.write(f"**Answer:** {answer}\n")
-                print("Answer logged.")
-            else:
-                print("Warning: Daily log file not configured.")
-        else:
-            print("Daily Question: No questions configured.")
+    def get_content(self):
+        import random
+        question = random.choice(self.questions)
+        panel = Panel(Text(question, justify="center"), title="Daily Question", border_style="blue")
+        return panel
+
+    def ask_question(self, console):
+        answer = Prompt.ask("[bold blue]Your Answer[/bold blue]")
+        self.log_answer(answer)
+
+    def log_answer(self, answer):
+        log_file = self.config['paths']['daily_log']
+        from datetime import datetime
+        date_str = datetime.now().strftime("%Y-%m-%d")
+        with open(log_file, 'a') as f:
+            f.write(f"## {date_str}\n\n**Question:** {self.get_content().renderable.plain}\n\n**Answer:** {answer}\n\n")

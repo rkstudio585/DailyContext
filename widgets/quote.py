@@ -1,20 +1,33 @@
-import os
-import random
-from widgets.base_widget import Widget
+import requests
+import json
+from rich.panel import Panel
+from rich.text import Text
 
-class QuoteWidget(Widget):
-    def display(self):
-        source = self.config.get('quote', {}).get('source', 'local')
-        if source == 'local':
-            file_path = self.config.get('quote', {}).get('file_path')
-            if file_path and os.path.exists(file_path):
-                with open(file_path, 'r') as f:
-                    quotes = [line.strip() for line in f if line.strip()]
-                if quotes:
-                    print(f"Quote: {random.choice(quotes)}")
-                else:
-                    print("Quote: No quotes found.")
+class QuoteWidget:
+    def __init__(self, config):
+        self.config = config
+
+    def get_content(self):
+        try:
+            response = requests.get(self.config['quote_api_url'])
+            if response.status_code == 200:
+                data = response.json()
+                quote = data['content']
+                author = data['author']
+                text = Text(f'“{quote}”\n- {author}', justify="center")
+                return Panel(text, title="Quote of the Day", border_style="magenta")
             else:
-                print("Quote: Local quotes file not found.")
-        else:
-            print("Quote: API integration not implemented yet.")
+                return self.get_local_quote()
+        except requests.exceptions.RequestException:
+            return self.get_local_quote()
+
+    def get_local_quote(self):
+        try:
+            with open(self.config['paths']['quotes'], 'r') as f:
+                quotes = f.readlines()
+            import random
+            quote = random.choice(quotes).strip()
+            text = Text(quote, justify="center")
+            return Panel(text, title="Quote of the Day", border_style="magenta")
+        except FileNotFoundError:
+            return Panel(Text("Could not fetch a quote.", justify="center"), title="Quote of the Day", border_style="red")

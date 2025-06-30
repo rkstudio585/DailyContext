@@ -1,31 +1,9 @@
 {
-    "date_time": {
-        "format": "%Y-%m-%d %H:%M:%S"
+    "paths": {
+        "todo": "data/todo.txt",
+        "til_folder": "data/til",
+        "daily_log": "data/daily_log.md",
+        "quotes": "data/quotes.txt"
     },
-    "quote": {
-        "source": "local",
-        "file_path": "data/quotes.txt"
-    },
-    "todo": {
-        "file_path": "data/todo.txt"
-    },
-    "til": {
-        "folder_path": "data/til"
-    },
-    "daily_question": {
-        "questions": [
-            "What is one thing you are grateful for today?",
-            "What challenge did you overcome today?",
-            "What did you learn today?",
-            "What is your intention for tomorrow?"
-        ],
-        "log_file": "data/daily_log.md"
-    },
-    "system_info": {
-        "enabled": true
-    },
-    "greeting": {
-        "enabled": true,
-        "name": "User"
-    }
+    "quote_api_url": "https://api.quotable.io/random"
 }
