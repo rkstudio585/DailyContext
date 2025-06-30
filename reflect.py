@@ -1,9 +1,14 @@
+"""Script to handle the interactive daily reflection.
+
+This script prompts the user with the daily question and saves their answer.
+"""
 import json
 from rich.console import Console
 from rich.prompt import Prompt
 from widgets.daily_question import DailyQuestionWidget
 
 def main():
+    """Loads configuration, prompts for reflection, and saves the answer."""
     with open("config.json") as f:
         config = json.load(f)
 
