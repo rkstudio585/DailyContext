@@ -25,10 +25,16 @@ A pure Python terminal application that displays a personalized daily dashboard.
 
 ## Usage
 
-To run the application:
+To display the dashboard:
 
 ```bash
 python3 main.py
+```
+
+To answer the daily reflection prompt:
+
+```bash
+python3 reflect.py
 ```
 
 ## ⚙️ Configuration

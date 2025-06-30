@@ -39,9 +39,7 @@ def main():
 
     console.print(layout)
 
-    dq_panel = dq_widget.get_content()
-    console.print(dq_panel)
-    dq_widget.ask_question(console)
+    console.print(dq_widget.get_content())
 
 if __name__ == "__main__":
     main()

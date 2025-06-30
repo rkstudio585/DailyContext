@@ -26,6 +26,8 @@ class QuoteWidget:
             with open(self.config['paths']['quotes'], 'r') as f:
                 quotes = f.readlines()
             import random
+            if not quotes:
+                return Panel(Text("Could not fetch a quote and no local quotes found.", justify="center"), title="Quote of the Day", border_style="red")
             quote = random.choice(quotes).strip()
             text = Text(quote, justify="center")
             return Panel(text, title="Quote of the Day", border_style="magenta")
